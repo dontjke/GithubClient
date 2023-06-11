@@ -1,53 +1,33 @@
 package com.example.githubclient
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.githubclient.databinding.ActivityMainBinding
-import com.example.githubclient.utils.KEY_BUNDLE_COUNTERS
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainView {
     private var binding: ActivityMainBinding? = null
+    private val presenter = MainPresenter(this)
 
-    private val counters = mutableListOf(0,0,0)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-        binding?.counterButton1?.setOnClickListener {
-            binding?.counterButton1?.text = ((++counters[0]).toString())
+
+        val listener = View.OnClickListener {
+            presenter.counterClick(it.id)
         }
-        binding?.counterButton2?.setOnClickListener {
-            binding?.counterButton2?.text = ((++counters[1]).toString())
-        }
-        binding?.counterButton3?.setOnClickListener {
-            binding?.counterButton3?.text = ((++counters[2]).toString())
-        }
-        initViews()
+
+        binding?.counterButton1?.setOnClickListener(listener)
+        binding?.counterButton2?.setOnClickListener(listener)
+        binding?.counterButton3?.setOnClickListener(listener)
     }
 
-    private fun initViews(){
-        binding?.counterButton1?.text = counters[0].toString()
-        binding?.counterButton2?.text = counters[1].toString()
-        binding?.counterButton3?.text = counters[2].toString()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putIntArray(KEY_BUNDLE_COUNTERS,counters.toIntArray())
-    }
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-        super.onSaveInstanceState(outState, outPersistentState)
-        outState.putIntArray(KEY_BUNDLE_COUNTERS,counters.toIntArray())
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        val countersArray = savedInstanceState.getIntArray(KEY_BUNDLE_COUNTERS)
-        countersArray?.toList()?.let {
-            counters.clear()
-            counters.addAll(it)
+    override fun setButtonText(index: Int, text: String) {
+        when (index) {
+            0 -> binding?.counterButton1?.text = text
+            1 -> binding?.counterButton2?.text = text
+            2 -> binding?.counterButton3?.text = text
         }
-        initViews()
     }
 }
