@@ -1,7 +1,6 @@
 package com.example.githubclient
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.githubclient.databinding.ActivityMainBinding
 
@@ -13,21 +12,32 @@ class MainActivity : AppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
-        val listener = View.OnClickListener {
-            presenter.counterClick(it.id)
-        }
-
-        binding?.counterButton1?.setOnClickListener(listener)
-        binding?.counterButton2?.setOnClickListener(listener)
-        binding?.counterButton3?.setOnClickListener(listener)
+        initViews()
     }
 
-    override fun setButtonText(index: Int, text: String) {
-        when (index) {
-            0 -> binding?.counterButton1?.text = text
-            1 -> binding?.counterButton2?.text = text
-            2 -> binding?.counterButton3?.text = text
+    private fun initViews() {
+        binding?.counterButton1?.setOnClickListener {
+            presenter.incrementCounter1()
+        }
+        binding?.counterButton2?.setOnClickListener {
+            presenter.incrementCounter2()
+        }
+        binding?.counterButton3?.setOnClickListener {
+            presenter.incrementCounter3()
         }
     }
+
+    override fun setButton1Text(text: String) {
+        binding?.counterButton1?.text = text
+    }
+
+    override fun setButton2Text(text: String) {
+        binding?.counterButton2?.text = text
+    }
+
+    override fun setButton3Text(text: String) {
+        binding?.counterButton3?.text = text
+    }
+
+
 }
