@@ -1,12 +1,13 @@
 package com.example.githubclient
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.example.githubclient.databinding.ActivityMainBinding
+import moxy.MvpAppCompatActivity
+import moxy.ktx.moxyPresenter
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : MvpAppCompatActivity(), MainView {
     private var binding: ActivityMainBinding? = null
-    private val presenter = MainPresenter(this)
+    private val presenter by moxyPresenter { MainPresenter(CountersModel()) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
