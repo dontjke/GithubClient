@@ -1,20 +1,44 @@
 package com.example.githubclient.mvp.presenter
 
-import com.example.githubclient.CountersModel
+import com.example.githubclient.mvp.model.GithubUser
+import com.example.githubclient.mvp.model.GithubUsersRepo
+import com.example.githubclient.mvp.presenter.list.IUserListPresenter
 import com.example.githubclient.mvp.view.MainView
+import com.example.githubclient.mvp.view.list.UserItemView
 import moxy.MvpPresenter
 
-class MainPresenter(private val model: CountersModel) : MvpPresenter<MainView>() {
+class MainPresenter(private val usersRepo: GithubUsersRepo) : MvpPresenter<MainView>() {
 
-    fun incrementCounter1() {
-        viewState.setButton1Text(model.next(CountersModel.COUNTER_1).toString())
+    class UserListPresenter : IUserListPresenter {
+        val users = mutableListOf<GithubUser>()
+        override var itemClickListener: ((UserItemView) -> Unit)? = null
+        /*get() = TODO("Not yet implemented")
+        set(value) {}*/
+
+        override fun bindView(view: UserItemView) {
+            val user = users[view.pos]
+            view.setLogin(user.login)
+        }
+
+        override fun getCount(): Int {
+            return users.size
+        }
     }
 
-    fun incrementCounter2() {
-        viewState.setButton2Text(model.next(CountersModel.COUNTER_2).toString())
+    private val userListPresenter = UserListPresenter()
+
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        viewState.init()
+        loadData()
+        userListPresenter.itemClickListener = {
+            //TODO
+        }
     }
 
-    fun incrementCounter3() {
-        viewState.setButton3Text(model.next(CountersModel.COUNTER_3).toString())
+    private fun loadData() {
+        val users = usersRepo.getUsers()
+        userListPresenter.users.addAll(users)
+        viewState.updateList()
     }
 }
