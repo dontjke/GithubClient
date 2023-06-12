@@ -1,7 +1,10 @@
-package com.example.githubclient
+package com.example.githubclient.ui.activity
 
 import android.os.Bundle
+import com.example.githubclient.CountersModel
+import com.example.githubclient.mvp.presenter.MainPresenter
 import com.example.githubclient.databinding.ActivityMainBinding
+import com.example.githubclient.mvp.view.MainView
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 

@@ -1,5 +1,7 @@
-package com.example.githubclient
+package com.example.githubclient.mvp.presenter
 
+import com.example.githubclient.CountersModel
+import com.example.githubclient.mvp.view.MainView
 import moxy.MvpPresenter
 
 class MainPresenter(private val model: CountersModel) : MvpPresenter<MainView>() {

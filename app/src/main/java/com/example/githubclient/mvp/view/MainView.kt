@@ -1,4 +1,4 @@
-package com.example.githubclient
+package com.example.githubclient.mvp.view
 
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
