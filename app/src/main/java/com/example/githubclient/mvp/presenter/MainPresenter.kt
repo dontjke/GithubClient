@@ -9,7 +9,7 @@ import moxy.MvpPresenter
 
 class MainPresenter(private val usersRepo: GithubUsersRepo) : MvpPresenter<MainView>() {
 
-    class UserListPresenter : IUserListPresenter {
+    class UsersListPresenter : IUserListPresenter {
         val users = mutableListOf<GithubUser>()
         override var itemClickListener: ((UserItemView) -> Unit)? = null
         /*get() = TODO("Not yet implemented")
@@ -25,20 +25,20 @@ class MainPresenter(private val usersRepo: GithubUsersRepo) : MvpPresenter<MainV
         }
     }
 
-    private val userListPresenter = UserListPresenter()
+    val usersListPresenter = UsersListPresenter()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
         loadData()
-        userListPresenter.itemClickListener = {
+        usersListPresenter.itemClickListener = {
             //TODO
         }
     }
 
     private fun loadData() {
         val users = usersRepo.getUsers()
-        userListPresenter.users.addAll(users)
+        usersListPresenter.users.addAll(users)
         viewState.updateList()
     }
 }
