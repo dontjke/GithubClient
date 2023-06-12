@@ -23,12 +23,12 @@ class UserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
 
     private var binding: FragmentUserBinding? = null
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) =
-        FragmentUserBinding.inflate(inflater, container, false).also {
-            binding = it
-        }.root
+    ) = FragmentUserBinding.inflate(inflater, container, false).also {
+        binding = it
+    }.root
 
     override fun onDestroyView() {
         super.onDestroyView()

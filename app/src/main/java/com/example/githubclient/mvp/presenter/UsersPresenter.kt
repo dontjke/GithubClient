@@ -13,7 +13,12 @@ class UsersPresenter(val usersRepo: GithubUsersRepo, val router: Router) :
     MvpPresenter<UsersView>() {
     class UsersListPresenter : IUserListPresenter {
         val users = mutableListOf<GithubUser>()
-        override var itemClickListener: ((UserItemView) -> Unit)? = null
+        override var itemClickListener: ((UserItemView) -> Unit)?
+            get() {
+                TODO()
+            }
+            set(value) {}
+
         override fun getCount() = users.size
         override fun bindView(view: UserItemView) {
             val user = users[view.pos]
