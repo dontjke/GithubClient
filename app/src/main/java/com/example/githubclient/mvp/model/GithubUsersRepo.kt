@@ -9,7 +9,7 @@ class GithubUsersRepo {
         GithubUser("login5")
     )
 
-    fun getUsers():List<GithubUser>{
+    fun getUsers(): List<GithubUser> {
         return repositories
     }
 }

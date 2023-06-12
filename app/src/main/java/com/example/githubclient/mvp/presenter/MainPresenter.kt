@@ -11,6 +11,7 @@ class MainPresenter(val router: Router, val screens: IScreens) :
         super.onFirstViewAttach()
         router.replaceScreen(screens.users())
     }
+
     fun backClicked() {
         router.exit()
     }

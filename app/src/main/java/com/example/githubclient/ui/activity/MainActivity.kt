@@ -1,12 +1,12 @@
 package com.example.githubclient.ui.activity
 
 import android.os.Bundle
+import com.example.githubclient.App
 import com.example.githubclient.R
 import com.example.githubclient.databinding.ActivityMainBinding
 import com.example.githubclient.mvp.presenter.MainPresenter
 import com.example.githubclient.mvp.view.MainView
 import com.example.githubclient.navigation.AndroidScreens
-import com.example.githubclient.ui.App
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
@@ -19,11 +19,11 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             AndroidScreens()
         )
     }
-    private var vb: ActivityMainBinding? = null
+    private var binding: ActivityMainBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        vb = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(vb?.root)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
     }
 
     override fun onResumeFragments() {

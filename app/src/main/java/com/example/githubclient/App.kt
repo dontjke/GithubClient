@@ -1,4 +1,4 @@
-package com.example.githubclient.ui
+package com.example.githubclient
 
 import android.app.Application
 import com.github.terrakok.cicerone.Cicerone
@@ -8,6 +8,7 @@ class App : Application() {
     companion object {
         lateinit var instance: App
     }
+
     //Временно до даггера положим это тут
     private val cicerone: Cicerone<Router> by lazy {
         Cicerone.create()
