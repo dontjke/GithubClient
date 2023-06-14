@@ -16,7 +16,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     private val presenter by moxyPresenter {
         MainPresenter(
             App.instance.router,
-            AndroidScreens()
+            App.instance.androidScreens
         )
     }
     private var binding: ActivityMainBinding? = null

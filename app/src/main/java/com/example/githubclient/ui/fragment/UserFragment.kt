@@ -14,7 +14,13 @@ import moxy.ktx.moxyPresenter
 
 class UserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
     companion object {
-        fun newInstance() = UserFragment()
+        fun newInstance(id: Int): UserFragment {
+            val fragment = UserFragment()
+            val arg = Bundle()
+            arg.putInt("id", id)
+            fragment.arguments = arg
+            return fragment
+        }
     }
 
     val presenter: UserPresenter by moxyPresenter {
@@ -28,6 +34,7 @@ class UserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
         savedInstanceState: Bundle?
     ) = FragmentUserBinding.inflate(inflater, container, false).also {
         binding = it
+        binding?.userTextView?.text = presenter.usersRepo.getUsers()[arguments?.getInt("id")?:0].login
     }.root
 
     override fun onDestroyView() {
