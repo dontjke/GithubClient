@@ -43,7 +43,7 @@ class UsersPresenter(val usersRepo: GithubUsersRepo, val router: Router,val scre
 
         override fun onNext(s: GithubUser) {
             println("onNext: $s")
-            /*usersListPresenter.users.add(s)*/
+            usersListPresenter.users.add(s)
         }
     }
 
