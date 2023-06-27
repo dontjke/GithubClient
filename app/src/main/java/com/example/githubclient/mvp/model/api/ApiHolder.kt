@@ -1,5 +1,6 @@
 package com.example.githubclient.mvp.model.api
 
+import com.example.githubclient.utils.GITHUB_BASE_URL
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
@@ -14,7 +15,7 @@ object ApiHolder {
             .create()
 
         Retrofit.Builder()
-            .baseUrl("https://api.github.com")
+            .baseUrl(GITHUB_BASE_URL)
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()

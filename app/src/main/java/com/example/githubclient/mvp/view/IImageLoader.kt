@@ -1,5 +1,5 @@
 package com.example.githubclient.mvp.view
 
-interface IImageLoader<T>{
+interface IImageLoader<T> {
     fun loadInto(url: String, container: T)
 }
