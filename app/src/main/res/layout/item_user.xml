@@ -7,13 +7,13 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/iv_avatar"
+        android:id="@+id/ivAvatar"
         android:layout_width="@dimen/avatar"
         android:layout_height="@dimen/avatar"
         android:layout_margin="@dimen/main_margin"/>
 
     <TextView
-        android:id="@+id/tv_login"
+        android:id="@+id/tvLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/main_margin"

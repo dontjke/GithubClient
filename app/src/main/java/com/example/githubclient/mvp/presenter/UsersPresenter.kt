@@ -28,6 +28,9 @@ class UsersPresenter(
             user.login.let {
                 view.setLogin(it)
             }
+            user.avatarUrl?.let {
+                view.loadAvatar(it)
+            }
         }
     }
 
