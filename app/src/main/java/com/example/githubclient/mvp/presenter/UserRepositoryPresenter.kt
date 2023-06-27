@@ -7,6 +7,7 @@ import com.example.githubclient.mvp.model.repo.retrofit.RetrofitGithubUsersRepos
 import com.example.githubclient.mvp.presenter.list.IRepositoryListPresenter
 import com.example.githubclient.mvp.view.UserRepositoryView
 import com.example.githubclient.mvp.view.list.IRepositoryItemView
+import com.example.githubclient.navigation.IScreens
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.Disposable
@@ -15,8 +16,10 @@ import moxy.MvpPresenter
 class UserRepositoryPresenter(
     private val user: GithubUser?,
     private val router: Router,
+    private val screens: IScreens,
     private val usersRepositoryImpl: RetrofitGithubUsersRepositoryImpl,
     private val uiScheduler: Scheduler
+
 ) :
     MvpPresenter<UserRepositoryView>() {
 
@@ -41,6 +44,9 @@ class UserRepositoryPresenter(
         super.onFirstViewAttach()
         loadData()
         user?.let { viewState.init(it) }
+        userRepositoryListPresenter.itemClickListener = {
+            router.navigateTo(screens.forks(userRepositoryListPresenter.userRepositories[it.pos]))
+        }
     }
 
     private fun loadData() {

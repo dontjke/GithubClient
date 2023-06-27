@@ -39,6 +39,7 @@ class UserRepositoryFragment : MvpAppCompatFragment(), UserRepositoryView, BackB
         UserRepositoryPresenter(
             user,
             App.instance.router,
+            App.instance.androidScreens,
             RetrofitGithubUsersRepositoryImpl(ApiHolder.api),
             AndroidSchedulers.mainThread()
         )

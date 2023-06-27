@@ -7,5 +7,9 @@
     <string name="login">login</string>
     <string name="user">user</string>
     <string name="repositoryName">repositoryName</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="number_of_forks">Number of forks:</string>
+    <string name="example">example</string>
 
 </resources>
