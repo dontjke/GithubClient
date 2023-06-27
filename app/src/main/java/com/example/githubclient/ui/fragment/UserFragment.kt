@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.githubclient.App
 import com.example.githubclient.databinding.FragmentUserBinding
-import com.example.githubclient.mvp.model.GithubUsersRepo
+import com.example.githubclient.mvp.model.entity.GithubUsersRepo
 import com.example.githubclient.mvp.presenter.UserPresenter
 import com.example.githubclient.mvp.view.UserView
 import com.example.githubclient.ui.activity.BackButtonListener
@@ -34,7 +34,8 @@ class UserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
         savedInstanceState: Bundle?
     ) = FragmentUserBinding.inflate(inflater, container, false).also {
         binding = it
-        binding?.userTextView?.text = presenter.usersRepo.getUsers()[arguments?.getInt("id")?:0].login
+        binding?.userTextView?.text =
+            presenter.usersRepo.getUsers()[arguments?.getInt("id") ?: 0].login
     }.root
 
     override fun onDestroyView() {
