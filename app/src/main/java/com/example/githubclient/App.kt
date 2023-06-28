@@ -1,8 +1,6 @@
 package com.example.githubclient
 
 import android.app.Application
-import android.content.Context
-import com.bumptech.glide.manager.ConnectivityMonitor
 import com.example.githubclient.mvp.model.entity.room.Database
 import com.example.githubclient.mvp.model.network.INetworkStatus
 import com.example.githubclient.navigation.AndroidScreens

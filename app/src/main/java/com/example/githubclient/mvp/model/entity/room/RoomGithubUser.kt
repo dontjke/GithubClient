@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 class RoomGithubUser(
     @PrimaryKey var id: String,
     var login: String,
-    var avatarUrl: String,
-    var repositoryUrl: String
+    var avatarUrl: String?,
+    var repositoryUrl: String?
 )

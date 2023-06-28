@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubclient.App
 import com.example.githubclient.databinding.FragmentRepositoryUserBinding
 import com.example.githubclient.mvp.model.api.ApiHolder
+import com.example.githubclient.mvp.model.cache.RoomGithubUserRepositoriesCacheImpl
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.room.Database
 import com.example.githubclient.mvp.model.repo.retrofit.RetrofitGithubUserRepositoriesImpl
@@ -15,7 +16,6 @@ import com.example.githubclient.mvp.view.UserRepositoryView
 import com.example.githubclient.ui.activity.BackButtonListener
 import com.example.githubclient.ui.adapter.RepositoriesRVAdapter
 import com.example.githubclient.ui.image.GlideImageLoader
-import com.example.githubclient.ui.network.AndroidNetworkStatus
 import com.example.githubclient.utils.GITHUB_USER
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
@@ -44,8 +44,8 @@ class UserRepositoriesFragment : MvpAppCompatFragment(), UserRepositoryView, Bac
             App.instance.androidScreens,
             RetrofitGithubUserRepositoriesImpl(
                 ApiHolder.api,
-                AndroidNetworkStatus(App.instance),
-                Database.getInstance()
+                App.networkStatus,
+                RoomGithubUserRepositoriesCacheImpl(Database.getInstance())
             ),
             AndroidSchedulers.mainThread()
         )

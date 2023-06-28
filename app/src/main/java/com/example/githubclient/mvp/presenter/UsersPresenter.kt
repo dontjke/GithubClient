@@ -2,7 +2,7 @@ package com.example.githubclient.mvp.presenter
 
 import android.util.Log
 import com.example.githubclient.mvp.model.entity.GithubUser
-import com.example.githubclient.mvp.model.repo.IGithubUsersRepository
+import com.example.githubclient.mvp.model.repo.retrofit.RetrofitGithubUsersRepositoryImpl
 import com.example.githubclient.mvp.presenter.list.IUserListPresenter
 import com.example.githubclient.mvp.view.UsersView
 import com.example.githubclient.mvp.view.list.IUserItemView
@@ -15,7 +15,7 @@ import moxy.MvpPresenter
 
 class UsersPresenter(
     private val uiScheduler: Scheduler,
-    private val githubUsersRepository: IGithubUsersRepository,
+    private val retrofitGithubUsersRepositoryImpl: RetrofitGithubUsersRepositoryImpl,
     private val router: Router,
     private val screens: IScreens
 ) :
@@ -51,7 +51,7 @@ class UsersPresenter(
     }
 
     private fun loadData() {
-        githubUsersRepository.getUsers()
+        retrofitGithubUsersRepositoryImpl.getUsers()
             .observeOn(uiScheduler)
             .subscribe({ repos ->
                 usersListPresenter.users.addAll(repos)

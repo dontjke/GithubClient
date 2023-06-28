@@ -7,17 +7,19 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.githubclient.mvp.model.entity.room.RoomGithubUserRepositories
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Single
 
 @Dao
 interface RepositoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(user: RoomGithubUserRepositories)
+    fun insert(user: RoomGithubUserRepositories): Completable
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(vararg users: RoomGithubUserRepositories)
+    fun insert(vararg users: RoomGithubUserRepositories): Completable
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(users: List<RoomGithubUserRepositories>)
+    fun insert(users: List<RoomGithubUserRepositories>): Completable
 
     @Update
     fun update(user: RoomGithubUserRepositories)
@@ -38,9 +40,9 @@ interface RepositoryDao {
     fun delete(users: List<RoomGithubUserRepositories>)
 
     @Query("SELECT * FROM RoomGithubUserRepositories")
-    fun getAll(): List<RoomGithubUserRepositories>
+    fun getAll(): Single<List<RoomGithubUserRepositories>>
 
     @Query("SELECT * FROM RoomGithubUserRepositories WHERE userId = :userId")
-    fun findForUser(userId: String): List<RoomGithubUserRepositories>
+    fun findForUser(userId: String): Single<List<RoomGithubUserRepositories>>
 
 }
