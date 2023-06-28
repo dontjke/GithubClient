@@ -8,10 +8,10 @@ import com.example.githubclient.mvp.presenter.list.IRepositoryListPresenter
 import com.example.githubclient.mvp.view.list.IRepositoryItemView
 import com.example.githubclient.utils.INVALID_INDEX
 
-class RepositoryRVAdapter(
+class RepositoriesRVAdapter(
     private val presenter: IRepositoryListPresenter,
 ) :
-    RecyclerView.Adapter<RepositoryRVAdapter.ViewHolder>() {
+    RecyclerView.Adapter<RepositoriesRVAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemUserRepositoryBinding) :
         RecyclerView.ViewHolder(binding.root), IRepositoryItemView {

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.githubclient.App
 import com.example.githubclient.databinding.FragmentForksBinding
-import com.example.githubclient.mvp.model.entity.GithubUserRepository
+import com.example.githubclient.mvp.model.entity.GithubUserRepositories
 import com.example.githubclient.mvp.presenter.ForksPresenter
 import com.example.githubclient.mvp.view.ForksView
 import com.example.githubclient.ui.activity.BackButtonListener
@@ -17,7 +17,7 @@ import moxy.ktx.moxyPresenter
 class ForksFragment : MvpAppCompatFragment(), ForksView, BackButtonListener {
 
     companion object {
-        fun newInstance(repos: GithubUserRepository) = ForksFragment().apply {
+        fun newInstance(repos: GithubUserRepositories) = ForksFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(GITHUB_USER, repos)
             }
@@ -39,7 +39,7 @@ class ForksFragment : MvpAppCompatFragment(), ForksView, BackButtonListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.getParcelable<GithubUserRepository>(GITHUB_USER)
+        arguments?.getParcelable<GithubUserRepositories>(GITHUB_USER)
             ?.let { presenter.show(it) }
     }
 

@@ -15,7 +15,7 @@ import moxy.MvpPresenter
 
 class UsersPresenter(
     private val uiScheduler: Scheduler,
-    private val usersRepository: IGithubUsersRepository,
+    private val githubUsersRepository: IGithubUsersRepository,
     private val router: Router,
     private val screens: IScreens
 ) :
@@ -51,7 +51,7 @@ class UsersPresenter(
     }
 
     private fun loadData() {
-        usersRepository.getUsers()
+        githubUsersRepository.getUsers()
             .observeOn(uiScheduler)
             .subscribe({ repos ->
                 usersListPresenter.users.addAll(repos)

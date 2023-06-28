@@ -8,25 +8,27 @@ import com.example.githubclient.App
 import com.example.githubclient.databinding.FragmentRepositoryUserBinding
 import com.example.githubclient.mvp.model.api.ApiHolder
 import com.example.githubclient.mvp.model.entity.GithubUser
-import com.example.githubclient.mvp.model.repo.retrofit.RetrofitGithubUsersRepositoryImpl
-import com.example.githubclient.mvp.presenter.UserRepositoryPresenter
+import com.example.githubclient.mvp.model.entity.room.Database
+import com.example.githubclient.mvp.model.repo.retrofit.RetrofitGithubUserRepositoriesImpl
+import com.example.githubclient.mvp.presenter.UserRepositoriesPresenter
 import com.example.githubclient.mvp.view.UserRepositoryView
 import com.example.githubclient.ui.activity.BackButtonListener
-import com.example.githubclient.ui.adapter.RepositoryRVAdapter
+import com.example.githubclient.ui.adapter.RepositoriesRVAdapter
 import com.example.githubclient.ui.image.GlideImageLoader
+import com.example.githubclient.ui.network.AndroidNetworkStatus
 import com.example.githubclient.utils.GITHUB_USER
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class UserRepositoryFragment : MvpAppCompatFragment(), UserRepositoryView, BackButtonListener {
+class UserRepositoriesFragment : MvpAppCompatFragment(), UserRepositoryView, BackButtonListener {
 
     private var _binding: FragmentRepositoryUserBinding? = null
     private val binding get() = _binding!!
 
     companion object {
-        fun newInstance(user: GithubUser): UserRepositoryFragment {
-            val fragment = UserRepositoryFragment()
+        fun newInstance(user: GithubUser): UserRepositoriesFragment {
+            val fragment = UserRepositoriesFragment()
             val arguments = Bundle()
             arguments.putParcelable(GITHUB_USER, user)
             fragment.arguments = arguments
@@ -34,18 +36,22 @@ class UserRepositoryFragment : MvpAppCompatFragment(), UserRepositoryView, BackB
         }
     }
 
-    val presenter: UserRepositoryPresenter by moxyPresenter {
+    val presenter: UserRepositoriesPresenter by moxyPresenter {
         val user: GithubUser? = arguments?.getParcelable(GITHUB_USER)
-        UserRepositoryPresenter(
+        UserRepositoriesPresenter(
             user,
             App.instance.router,
             App.instance.androidScreens,
-            RetrofitGithubUsersRepositoryImpl(ApiHolder.api),
+            RetrofitGithubUserRepositoriesImpl(
+                ApiHolder.api,
+                AndroidNetworkStatus(App.instance),
+                Database.getInstance()
+            ),
             AndroidSchedulers.mainThread()
         )
     }
 
-    var adapter: RepositoryRVAdapter? = null
+    var adapter: RepositoriesRVAdapter? = null
 
 
     override fun onCreateView(
@@ -66,7 +72,7 @@ class UserRepositoryFragment : MvpAppCompatFragment(), UserRepositoryView, BackB
         user.avatarUrl?.let { GlideImageLoader().loadInto(it, binding.userAvatar) }
         binding.userLogin.text = user.login
         binding.rvRepos.layoutManager = LinearLayoutManager(context)
-        adapter = RepositoryRVAdapter(presenter.userRepositoryListPresenter)
+        adapter = RepositoriesRVAdapter(presenter.userRepositoryListPresenter)
         binding.rvRepos.adapter = adapter
     }
 

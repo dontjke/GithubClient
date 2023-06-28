@@ -5,7 +5,8 @@ import com.google.gson.annotations.Expose
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class GithubUserRepository(
+data class GithubUserRepositories(
+    @Expose val id: String,
     @Expose val name: String,
     @Expose val forksCount: Int
 ) : Parcelable
