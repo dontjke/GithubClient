@@ -1,5 +1,5 @@
 package com.example.githubclient.mvp.presenter.list
 
-import com.example.githubclient.mvp.view.list.UserItemView
+import com.example.githubclient.mvp.view.list.IUserItemView
 
-interface IUserListPresenter : IListPresenter<UserItemView>
+interface IUserListPresenter : IListPresenter<IUserItemView>

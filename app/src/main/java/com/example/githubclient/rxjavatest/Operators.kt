@@ -61,7 +61,7 @@ class Operators {
 
         fun execFilter() {
             producer.createJust()
-                .filter() { it.toInt() > 1 }
+                .filter { it.toInt() > 1 }
                 .subscribe({ s ->
                     println("onNext: $s")
                 }, {
@@ -96,7 +96,7 @@ class Operators {
             val observable1 = Observable.just("1", "7").delay(1, TimeUnit.SECONDS)
             val observable2 = Observable.just("2", "4").delay(2, TimeUnit.SECONDS)
             val observable3 = Observable.just("3", "4").delay(4, TimeUnit.SECONDS)
-            val observable4 = Observable.just("4" ).delay(6, TimeUnit.SECONDS)
+            val observable4 = Observable.just("4").delay(6, TimeUnit.SECONDS)
 
 
 
@@ -106,8 +106,8 @@ class Operators {
                     return@Function4 listOf(t1, t2, t3, t4)
                 }).subscribeOn(Schedulers.computation())
                 .subscribe({
-                    println("Zip result: $it" )
-                },{
+                    println("Zip result: $it")
+                }, {
                     println("onError: ${it.message}")
                 })
 

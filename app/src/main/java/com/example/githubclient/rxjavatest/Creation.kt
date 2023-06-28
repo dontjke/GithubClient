@@ -13,7 +13,7 @@ class Creation {
     }
 
     class Producer {
-        fun randomResultOperation() : Boolean {
+        fun randomResultOperation(): Boolean {
             Thread.sleep(Random.nextLong(1000))
             return listOf(true, false, true)[Random.nextInt(2)]
         }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/userAvatar"
+        android:layout_width="@dimen/user_avatar"
+        android:layout_height="@dimen/user_avatar"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/main_margin"
+        android:src="@drawable/baseline_person_outline_24" />
+
+    <TextView
+        android:id="@+id/userLogin"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRepos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/main_padding"
+        android:paddingBottom="@dimen/main_padding" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
