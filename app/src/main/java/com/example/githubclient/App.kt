@@ -1,13 +1,17 @@
 package com.example.githubclient
 
 import android.app.Application
+import com.example.githubclient.mvp.model.entity.room.Database
+import com.example.githubclient.mvp.model.network.INetworkStatus
 import com.example.githubclient.navigation.AndroidScreens
+import com.example.githubclient.ui.network.AndroidNetworkStatus
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
 
 class App : Application() {
     companion object {
         lateinit var instance: App
+        lateinit var networkStatus: INetworkStatus
     }
 
     val androidScreens = AndroidScreens()
@@ -21,5 +25,8 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+
+        networkStatus = AndroidNetworkStatus(instance)
+        Database.create(this)
     }
 }
