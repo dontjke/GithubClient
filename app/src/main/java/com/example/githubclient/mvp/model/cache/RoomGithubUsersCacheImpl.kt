@@ -5,6 +5,7 @@ import com.example.githubclient.mvp.model.entity.room.Database
 import com.example.githubclient.mvp.model.entity.room.RoomGithubUser
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class RoomGithubUsersCacheImpl(private val database: Database) : IUsersCache {
     override fun insertUsersToDatabase(githubUser: List<GithubUser>): Completable {
@@ -15,7 +16,7 @@ class RoomGithubUsersCacheImpl(private val database: Database) : IUsersCache {
                 user.avatarUrl,
                 user.reposUrl
             )
-        })
+        }).subscribeOn(Schedulers.io())
     }
 
     override fun getUsersFromDatabase(): Single<List<GithubUser>> {
@@ -28,6 +29,6 @@ class RoomGithubUsersCacheImpl(private val database: Database) : IUsersCache {
                     roomUser.repositoryUrl
                 )
             }
-        }
+        }.subscribeOn(Schedulers.io())
     }
 }

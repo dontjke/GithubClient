@@ -3,7 +3,7 @@ package com.example.githubclient.mvp.presenter
 import android.util.Log
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.GithubUserRepositories
-import com.example.githubclient.mvp.model.repo.retrofit.RetrofitGithubUserRepositoriesImpl
+import com.example.githubclient.mvp.model.repo.IGithubUserRepositories
 import com.example.githubclient.mvp.presenter.list.IRepositoryListPresenter
 import com.example.githubclient.mvp.view.UserRepositoryView
 import com.example.githubclient.mvp.view.list.IRepositoryItemView
@@ -13,16 +13,22 @@ import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
+import javax.inject.Inject
 
-class UserRepositoriesPresenter(
-    private val user: GithubUser?,
-    private val router: Router,
-    private val screens: IScreens,
-    private val retrofitGithubUserRepositoriesImpl: RetrofitGithubUserRepositoriesImpl,
-    private val uiScheduler: Scheduler
-
-) :
+class UserRepositoriesPresenter(private val user: GithubUser?) :
     MvpPresenter<UserRepositoryView>() {
+
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var screens: IScreens
+
+    @Inject
+    lateinit var retrofitGithubUserRepositoriesImpl: IGithubUserRepositories
+
+    @Inject
+    lateinit var uiScheduler: Scheduler
 
     private var compositeDisposable = CompositeDisposable()
 

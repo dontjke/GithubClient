@@ -15,7 +15,7 @@ abstract class Database : RoomDatabase() {
     abstract val repositoryDao: RepositoryDao
 
     companion object {
-        private const val DB_NAME = "database.db"
+        const val DB_NAME = "database.db"
         private var instance: Database? = null
 
         fun getInstance() = instance ?: throw RuntimeException(

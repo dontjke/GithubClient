@@ -4,10 +4,11 @@ import com.example.githubclient.mvp.model.entity.GithubUserRepositories
 import com.example.githubclient.mvp.view.ForksView
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
+import javax.inject.Inject
 
-class ForksPresenter(
-    private val router: Router
-) : MvpPresenter<ForksView>() {
+class ForksPresenter : MvpPresenter<ForksView>() {
+    @Inject
+    lateinit var router: Router
 
     fun show(repository: GithubUserRepositories) {
         viewState.showNumberOfForks(repository.forksCount.toString())
