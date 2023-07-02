@@ -10,7 +10,6 @@ import com.example.githubclient.mvp.presenter.UsersPresenter
 import com.example.githubclient.mvp.view.UsersView
 import com.example.githubclient.ui.activity.BackButtonListener
 import com.example.githubclient.ui.adapter.UsersRVAdapter
-import com.example.githubclient.ui.image.GlideImageLoader
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -47,7 +46,9 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
     override fun init() {
         binding.rvUsers.layoutManager = LinearLayoutManager(context)
-        adapter = UsersRVAdapter(presenter.usersListPresenter, GlideImageLoader())
+        adapter = UsersRVAdapter(presenter.usersListPresenter).apply {
+            App.instance.appComponent.inject(this)
+        }
         binding.rvUsers.adapter = adapter
     }
 

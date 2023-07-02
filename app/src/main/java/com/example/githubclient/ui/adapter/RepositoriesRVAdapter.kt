@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubclient.databinding.ItemUserRepositoryBinding
-import com.example.githubclient.mvp.presenter.list.IRepositoryListPresenter
+import com.example.githubclient.mvp.presenter.list.IRepositoriesListPresenter
 import com.example.githubclient.mvp.view.list.IRepositoryItemView
 import com.example.githubclient.utils.INVALID_INDEX
 
 class RepositoriesRVAdapter(
-    private val presenter: IRepositoryListPresenter,
+    private val presenter: IRepositoriesListPresenter,
 ) :
     RecyclerView.Adapter<RepositoriesRVAdapter.ViewHolder>() {
 

@@ -4,7 +4,7 @@ import android.util.Log
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.GithubUserRepositories
 import com.example.githubclient.mvp.model.repo.IGithubUserRepositories
-import com.example.githubclient.mvp.presenter.list.IRepositoryListPresenter
+import com.example.githubclient.mvp.presenter.list.IRepositoriesListPresenter
 import com.example.githubclient.mvp.view.UserRepositoryView
 import com.example.githubclient.mvp.view.list.IRepositoryItemView
 import com.example.githubclient.navigation.IScreens
@@ -32,7 +32,7 @@ class UserRepositoriesPresenter(private val user: GithubUser?) :
 
     private var compositeDisposable = CompositeDisposable()
 
-    class UserRepositoryListPresenter : IRepositoryListPresenter {
+    class UserRepositoriesListPresenter : IRepositoriesListPresenter {
 
         val userRepositories = mutableListOf<GithubUserRepositories>()
 
@@ -45,10 +45,11 @@ class UserRepositoriesPresenter(private val user: GithubUser?) :
         }
     }
 
-    val userRepositoryListPresenter = UserRepositoryListPresenter()
+    val userRepositoryListPresenter = UserRepositoriesListPresenter()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+        user?.let { viewState.loadAvatarAndLogin(it) }
         loadData()
         user?.let { viewState.init(it) }
         userRepositoryListPresenter.itemClickListener = {
