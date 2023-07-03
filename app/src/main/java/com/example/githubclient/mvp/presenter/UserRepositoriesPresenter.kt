@@ -1,10 +1,12 @@
 package com.example.githubclient.mvp.presenter
 
 import android.util.Log
+import android.widget.ImageView
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.GithubUserRepositories
 import com.example.githubclient.mvp.model.repo.IGithubUserRepositories
 import com.example.githubclient.mvp.presenter.list.IRepositoriesListPresenter
+import com.example.githubclient.mvp.view.IImageLoader
 import com.example.githubclient.mvp.view.UserRepositoryView
 import com.example.githubclient.mvp.view.list.IRepositoryItemView
 import com.example.githubclient.navigation.IScreens
@@ -29,6 +31,9 @@ class UserRepositoriesPresenter(private val user: GithubUser?) :
 
     @Inject
     lateinit var uiScheduler: Scheduler
+
+    @Inject
+    lateinit var imageLoader: IImageLoader<ImageView>
 
     private var compositeDisposable = CompositeDisposable()
 

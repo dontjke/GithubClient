@@ -23,9 +23,6 @@ class UserRepositoriesFragment : MvpAppCompatFragment(), UserRepositoryView, Bac
     private var _binding: FragmentRepositoryUserBinding? = null
     private val binding get() = _binding!!
 
-    @Inject
-    lateinit var imageLoader: IImageLoader<ImageView>
-
     companion object {
         fun newInstance(user: GithubUser): UserRepositoriesFragment {
             val fragment = UserRepositoriesFragment()
@@ -53,7 +50,7 @@ class UserRepositoriesFragment : MvpAppCompatFragment(), UserRepositoryView, Bac
         savedInstanceState: Bundle?
     ) = FragmentRepositoryUserBinding.inflate(inflater, container, false).also {
         _binding = it
-        App.instance.appComponent.inject(this)
+
     }.root
 
     override fun onDestroyView() {
@@ -73,7 +70,7 @@ class UserRepositoriesFragment : MvpAppCompatFragment(), UserRepositoryView, Bac
     }
 
     override fun loadAvatarAndLogin(user: GithubUser) {
-        user.avatarUrl?.let { imageLoader.loadInto(it, binding.userAvatar) }
+        user.avatarUrl?.let { presenter.imageLoader.loadInto(it, binding.userAvatar) }
         binding.userLogin.text = user.login
     }
 }

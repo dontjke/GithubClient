@@ -33,11 +33,9 @@ interface AppComponent {
     fun inject(mainPresenter: MainPresenter)
 
     fun inject(usersPresenter: UsersPresenter)
-    fun inject(usersFragment: UsersFragment)
 
     fun inject(usersRVAdapter: UsersRVAdapter)
 
-    fun inject(userRepositoriesFragment: UserRepositoriesFragment)
     fun inject(userRepositoriesPresenter: UserRepositoriesPresenter)
 
     fun inject(forksPresenter: ForksPresenter)

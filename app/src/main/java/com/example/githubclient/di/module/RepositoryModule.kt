@@ -6,8 +6,8 @@ import com.example.githubclient.mvp.model.cache.IUsersCache
 import com.example.githubclient.mvp.model.network.INetworkStatus
 import com.example.githubclient.mvp.model.repo.IGithubUserRepositories
 import com.example.githubclient.mvp.model.repo.IGithubUsersRepository
-import com.example.githubclient.mvp.model.repo.retrofit.RetrofitGithubUserRepositoriesImpl
-import com.example.githubclient.mvp.model.repo.retrofit.RetrofitGithubUsersRepositoryImpl
+import com.example.githubclient.mvp.model.repo.retrofit.GithubUserRepositoriesImpl
+import com.example.githubclient.mvp.model.repo.retrofit.GithubUsersRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -21,7 +21,7 @@ class RepositoryModule {
         api: IDataSource,
         networkStatus: INetworkStatus,
         cache: IUsersCache
-    ): IGithubUsersRepository = RetrofitGithubUsersRepositoryImpl(api, networkStatus, cache)
+    ): IGithubUsersRepository = GithubUsersRepositoryImpl(api, networkStatus, cache)
 
     @Singleton
     @Provides
@@ -29,5 +29,5 @@ class RepositoryModule {
         api: IDataSource,
         networkStatus: INetworkStatus,
         cache: IRepositoriesCache
-    ): IGithubUserRepositories = RetrofitGithubUserRepositoriesImpl(api, networkStatus, cache)
+    ): IGithubUserRepositories = GithubUserRepositoriesImpl(api, networkStatus, cache)
 }
