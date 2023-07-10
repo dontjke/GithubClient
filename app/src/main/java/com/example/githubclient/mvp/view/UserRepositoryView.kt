@@ -9,4 +9,5 @@ import moxy.viewstate.strategy.StateStrategyType
 interface UserRepositoryView : MvpView {
     fun init(user: GithubUser)
     fun updateList()
+    fun loadAvatarAndLogin(user: GithubUser)
 }

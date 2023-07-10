@@ -1,10 +1,12 @@
 package com.example.githubclient.mvp.presenter
 
 import android.util.Log
+import android.widget.ImageView
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.GithubUserRepositories
-import com.example.githubclient.mvp.model.repo.retrofit.RetrofitGithubUserRepositoriesImpl
-import com.example.githubclient.mvp.presenter.list.IRepositoryListPresenter
+import com.example.githubclient.mvp.model.repo.IGithubUserRepositories
+import com.example.githubclient.mvp.presenter.list.IRepositoriesListPresenter
+import com.example.githubclient.mvp.view.IImageLoader
 import com.example.githubclient.mvp.view.UserRepositoryView
 import com.example.githubclient.mvp.view.list.IRepositoryItemView
 import com.example.githubclient.navigation.IScreens
@@ -13,20 +15,29 @@ import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
+import javax.inject.Inject
 
-class UserRepositoriesPresenter(
-    private val user: GithubUser?,
-    private val router: Router,
-    private val screens: IScreens,
-    private val retrofitGithubUserRepositoriesImpl: RetrofitGithubUserRepositoriesImpl,
-    private val uiScheduler: Scheduler
-
-) :
+class UserRepositoriesPresenter(private val user: GithubUser?) :
     MvpPresenter<UserRepositoryView>() {
+
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var screens: IScreens
+
+    @Inject
+    lateinit var retrofitGithubUserRepositoriesImpl: IGithubUserRepositories
+
+    @Inject
+    lateinit var uiScheduler: Scheduler
+
+    @Inject
+    lateinit var imageLoader: IImageLoader<ImageView>
 
     private var compositeDisposable = CompositeDisposable()
 
-    class UserRepositoryListPresenter : IRepositoryListPresenter {
+    class UserRepositoriesListPresenter : IRepositoriesListPresenter {
 
         val userRepositories = mutableListOf<GithubUserRepositories>()
 
@@ -39,10 +50,11 @@ class UserRepositoriesPresenter(
         }
     }
 
-    val userRepositoryListPresenter = UserRepositoryListPresenter()
+    val userRepositoryListPresenter = UserRepositoriesListPresenter()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+        user?.let { viewState.loadAvatarAndLogin(it) }
         loadData()
         user?.let { viewState.init(it) }
         userRepositoryListPresenter.itemClickListener = {

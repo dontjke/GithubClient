@@ -6,6 +6,7 @@ import com.example.githubclient.mvp.model.entity.room.Database
 import com.example.githubclient.mvp.model.entity.room.RoomGithubUserRepositories
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class RoomGithubUserRepositoriesCacheImpl(private val database: Database) : IRepositoriesCache {
     override fun insertRepositoriesToDatabase(
@@ -19,7 +20,7 @@ class RoomGithubUserRepositoriesCacheImpl(private val database: Database) : IRep
                 userRepos.forksCount,
                 githubUser.id
             )
-        })
+        }).subscribeOn(Schedulers.io())
     }
 
     override fun getRepositoriesFromDatabase(user: GithubUser): Single<List<GithubUserRepositories>> {
@@ -31,6 +32,6 @@ class RoomGithubUserRepositoriesCacheImpl(private val database: Database) : IRep
                     roomUserRepos.forksCount
                 )
             }
-        }
+        }.subscribeOn(Schedulers.io())
     }
 }

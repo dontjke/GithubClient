@@ -8,7 +8,7 @@ import com.example.githubclient.mvp.model.repo.IGithubUsersRepository
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class RetrofitGithubUsersRepositoryImpl(
+class GithubUsersRepositoryImpl(
     private val api: IDataSource,
     private val networkStatus: INetworkStatus,
     private val cache: IUsersCache
