@@ -1,6 +1,7 @@
 package com.example.githubclient.mvp.presenter
 
 import android.util.Log
+import com.example.githubclient.di.user.module.IUserScopeContainer
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.repo.IGithubUsersRepository
 import com.example.githubclient.mvp.presenter.list.IUserListPresenter
@@ -27,6 +28,9 @@ class UsersPresenter :
 
     @Inject
     lateinit var screens: IScreens
+
+    @Inject
+    lateinit var userScopeContainer: IUserScopeContainer
 
     private var compositeDisposable = CompositeDisposable()
 
@@ -69,8 +73,10 @@ class UsersPresenter :
     }
 
     override fun onDestroy() {
+        userScopeContainer.releaseUserScope()
         super.onDestroy()
         compositeDisposable.dispose()
+
     }
 
     fun backPressed(): Boolean {

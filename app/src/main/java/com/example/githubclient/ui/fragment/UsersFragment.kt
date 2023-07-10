@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubclient.App
 import com.example.githubclient.databinding.FragmentUsersBinding
+import com.example.githubclient.di.user.UserSubcomponent
 import com.example.githubclient.mvp.presenter.UsersPresenter
 import com.example.githubclient.mvp.view.UsersView
 import com.example.githubclient.ui.activity.BackButtonListener
@@ -18,6 +19,9 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private var _binding: FragmentUsersBinding? = null
     private val binding get() = _binding!!
 
+    var userSubcomponent: UserSubcomponent? = null
+    var adapter: UsersRVAdapter? = null
+
     companion object {
         fun newInstance() = UsersFragment()
     }
@@ -26,10 +30,10 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     val presenter: UsersPresenter by moxyPresenter {
         UsersPresenter(
         ).apply {
-            App.instance.appComponent.inject(this)
+            userSubcomponent = App.instance.initUserSubcomponent()
+            userSubcomponent?.inject(this)
         }
     }
-    var adapter: UsersRVAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +51,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     override fun init() {
         binding.rvUsers.layoutManager = LinearLayoutManager(context)
         adapter = UsersRVAdapter(presenter.usersListPresenter).apply {
-            App.instance.appComponent.inject(this)
+            userSubcomponent?.inject(this)
         }
         binding.rvUsers.adapter = adapter
     }
