@@ -1,4 +1,4 @@
-package com.example.githubclient.mvp.model.repo
+package com.example.githubclient.mvp.model.cache.repo
 
 import com.example.githubclient.mvp.model.entity.GithubUser
 import io.reactivex.rxjava3.core.Single

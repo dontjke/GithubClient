@@ -7,14 +7,13 @@ import com.example.githubclient.mvp.model.cache.IUsersCache
 import com.example.githubclient.mvp.model.cache.RoomGithubUsersCacheImpl
 import com.example.githubclient.mvp.model.entity.room.Database
 import com.example.githubclient.mvp.model.network.INetworkStatus
-import com.example.githubclient.mvp.model.repo.IGithubUsersRepository
-import com.example.githubclient.mvp.model.repo.retrofit.GithubUsersRepositoryImpl
+import com.example.githubclient.mvp.model.cache.repo.IGithubUsersRepository
+import com.example.githubclient.mvp.model.cache.repo.retrofit.GithubUsersRepositoryImpl
 import dagger.Module
 import dagger.Provides
 
 @Module
 class UserModule {
-
 
     @Provides
     fun usersCache(database: Database): IUsersCache = RoomGithubUsersCacheImpl(database)

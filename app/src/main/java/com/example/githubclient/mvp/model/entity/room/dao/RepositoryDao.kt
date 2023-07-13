@@ -13,31 +13,31 @@ import io.reactivex.rxjava3.core.Single
 @Dao
 interface RepositoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(user: RoomGithubUserRepositories): Completable
+    fun insert(repository: RoomGithubUserRepositories): Completable
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(vararg users: RoomGithubUserRepositories): Completable
+    fun insert(vararg repository: RoomGithubUserRepositories): Completable
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(users: List<RoomGithubUserRepositories>): Completable
+    fun insert(repository: List<RoomGithubUserRepositories>): Completable
 
     @Update
-    fun update(user: RoomGithubUserRepositories)
+    fun update(repository: RoomGithubUserRepositories)
 
     @Update
-    fun update(vararg users: RoomGithubUserRepositories)
+    fun update(vararg repository: RoomGithubUserRepositories)
 
     @Update
-    fun update(users: List<RoomGithubUserRepositories>)
+    fun update(repository: List<RoomGithubUserRepositories>)
 
     @Delete
-    fun delete(user: RoomGithubUserRepositories)
+    fun delete(repository: RoomGithubUserRepositories)
 
     @Delete
-    fun delete(vararg users: RoomGithubUserRepositories)
+    fun delete(vararg repository: RoomGithubUserRepositories)
 
     @Delete
-    fun delete(users: List<RoomGithubUserRepositories>)
+    fun delete(repository: List<RoomGithubUserRepositories>)
 
     @Query("SELECT * FROM RoomGithubUserRepositories")
     fun getAll(): Single<List<RoomGithubUserRepositories>>

@@ -1,11 +1,11 @@
-package com.example.githubclient.mvp.model.repo.retrofit
+package com.example.githubclient.mvp.model.cache.repo.retrofit
 
 import com.example.githubclient.mvp.model.api.IDataSource
 import com.example.githubclient.mvp.model.cache.IRepositoriesCache
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.GithubUserRepositories
 import com.example.githubclient.mvp.model.network.INetworkStatus
-import com.example.githubclient.mvp.model.repo.IGithubUserRepositories
+import com.example.githubclient.mvp.model.cache.repo.IGithubUserRepositories
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 

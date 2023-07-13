@@ -7,8 +7,8 @@ import com.example.githubclient.mvp.model.cache.IRepositoriesCache
 import com.example.githubclient.mvp.model.cache.RoomGithubUserRepositoriesCacheImpl
 import com.example.githubclient.mvp.model.entity.room.Database
 import com.example.githubclient.mvp.model.network.INetworkStatus
-import com.example.githubclient.mvp.model.repo.IGithubUserRepositories
-import com.example.githubclient.mvp.model.repo.retrofit.GithubUserRepositoriesImpl
+import com.example.githubclient.mvp.model.cache.repo.IGithubUserRepositories
+import com.example.githubclient.mvp.model.cache.repo.retrofit.GithubUserRepositoriesImpl
 import dagger.Module
 import dagger.Provides
 

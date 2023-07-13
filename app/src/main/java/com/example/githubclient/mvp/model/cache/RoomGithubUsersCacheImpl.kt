@@ -14,7 +14,8 @@ class RoomGithubUsersCacheImpl(private val database: Database) : IUsersCache {
                 user.id,
                 user.login,
                 user.avatarUrl,
-                user.reposUrl
+                user.reposUrl,
+                user.followersUrl
             )
         }).subscribeOn(Schedulers.io())
     }

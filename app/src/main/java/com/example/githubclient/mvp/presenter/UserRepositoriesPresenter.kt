@@ -5,7 +5,7 @@ import android.widget.ImageView
 import com.example.githubclient.di.repository.module.IRepositoryScopeContainer
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.GithubUserRepositories
-import com.example.githubclient.mvp.model.repo.IGithubUserRepositories
+import com.example.githubclient.mvp.model.cache.repo.IGithubUserRepositories
 import com.example.githubclient.mvp.presenter.list.IRepositoriesListPresenter
 import com.example.githubclient.mvp.view.IImageLoader
 import com.example.githubclient.mvp.view.UserRepositoryView
@@ -62,7 +62,7 @@ class UserRepositoriesPresenter(private val user: GithubUser?) :
         loadData()
         user?.let { viewState.init(it) }
         userRepositoryListPresenter.itemClickListener = {
-            router.navigateTo(screens.forks(userRepositoryListPresenter.userRepositories[it.pos]))
+            router.navigateTo(screens.repository(userRepositoryListPresenter.userRepositories[it.pos]))
         }
     }
 

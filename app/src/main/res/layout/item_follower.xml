@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/ivAvatarFollower"
+        android:layout_width="@dimen/avatar"
+        android:layout_height="@dimen/avatar"
+        android:layout_margin="@dimen/main_margin" />
+
+    <TextView
+        android:id="@+id/tvLoginFollower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/main_margin"
+        tools:text="login" />
+</LinearLayout>

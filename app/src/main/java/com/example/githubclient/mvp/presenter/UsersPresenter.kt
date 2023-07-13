@@ -2,8 +2,8 @@ package com.example.githubclient.mvp.presenter
 
 import android.util.Log
 import com.example.githubclient.di.user.module.IUserScopeContainer
+import com.example.githubclient.mvp.model.cache.repo.IGithubUsersRepository
 import com.example.githubclient.mvp.model.entity.GithubUser
-import com.example.githubclient.mvp.model.repo.IGithubUsersRepository
 import com.example.githubclient.mvp.presenter.list.IUserListPresenter
 import com.example.githubclient.mvp.view.UsersView
 import com.example.githubclient.mvp.view.list.IUserItemView
@@ -36,6 +36,8 @@ class UsersPresenter :
 
     class UsersListPresenter : IUserListPresenter {
         val users = mutableListOf<GithubUser>()
+        private val repositoriesClickObservers = mutableListOf<(IUserItemView) -> Unit>()
+        private val followersClickObservers = mutableListOf<(IUserItemView) -> Unit>()
         override var itemClickListener: ((IUserItemView) -> Unit)? = null
 
         override fun getCount() = users.size
@@ -48,17 +50,56 @@ class UsersPresenter :
                 view.loadAvatar(it)
             }
         }
+
+        override fun onRepositoriesClicked(view: IUserItemView) {
+            repositoriesClickObservers.forEach { observer ->
+                observer.invoke(view)
+            }
+        }
+
+        override fun onFollowersClicked(view: IUserItemView) {
+            followersClickObservers.forEach { observer ->
+                observer.invoke(view)
+            }
+        }
+
+        fun addRepositoriesObserver(observer: (IUserItemView) -> Unit) {
+            repositoriesClickObservers.add(observer)
+        }
+
+        fun addFollowersObserver(observer: (IUserItemView) -> Unit) {
+            followersClickObservers.add(observer)
+        }
+
+        fun removeRepositoriesObserver(observer: (IUserItemView) -> Unit) {
+            repositoriesClickObservers.remove(observer)
+        }
+
+        fun removeFollowersObserver(observer: (IUserItemView) -> Unit) {
+            followersClickObservers.remove(observer)
+        }
     }
 
+    private lateinit var repositoriesObserver: (IUserItemView) -> Unit
+    private lateinit var followersObserver: (IUserItemView) -> Unit
     val usersListPresenter = UsersListPresenter()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
         loadData()
-        usersListPresenter.itemClickListener = {
-            router.navigateTo(screens.userRepositories(usersListPresenter.users[it.pos]))
+        repositoriesObserver = { userItemView ->
+            val user = usersListPresenter.users[userItemView.pos]
+            router.navigateTo(screens.userRepositories(user))
         }
+
+        followersObserver = { userItemView ->
+            val user = usersListPresenter.users[userItemView.pos]
+            router.navigateTo(screens.followers(user))
+        }
+
+        usersListPresenter.addRepositoriesObserver(repositoriesObserver)
+        usersListPresenter.addFollowersObserver(followersObserver)
     }
 
     private fun loadData() {
@@ -72,15 +113,18 @@ class UsersPresenter :
             }).disposeBy(compositeDisposable)
     }
 
+    fun backPressed(): Boolean {
+        router.exit()
+        return true
+    }
+
     override fun onDestroy() {
         userScopeContainer.releaseUserScope()
+        usersListPresenter.removeRepositoriesObserver(repositoriesObserver)
+        usersListPresenter.removeFollowersObserver(followersObserver)
         super.onDestroy()
         compositeDisposable.dispose()
 
     }
 
-    fun backPressed(): Boolean {
-        router.exit()
-        return true
-    }
 }
