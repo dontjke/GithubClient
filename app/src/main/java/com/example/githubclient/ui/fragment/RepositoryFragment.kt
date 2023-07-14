@@ -31,11 +31,12 @@ class RepositoryFragment : MvpAppCompatFragment(), RepositoryView, BackButtonLis
 
     val presenter: RepositoryPresenter by moxyPresenter {
 
-        val repository: GithubUserRepositories? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getParcelable(REPOSITORY, GithubUserRepositories::class.java)
-        } else {
-            @Suppress("DEPRECATION") arguments?.getParcelable(REPOSITORY)
-        }
+        val repository: GithubUserRepositories? =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                arguments?.getParcelable(REPOSITORY, GithubUserRepositories::class.java)
+            } else {
+                @Suppress("DEPRECATION") arguments?.getParcelable(REPOSITORY)
+            }
 
         RepositoryPresenter(repository).apply {
             App.instance.repositorySubcomponent?.inject(this)

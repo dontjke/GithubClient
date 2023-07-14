@@ -5,10 +5,10 @@ import com.example.githubclient.di.repository.RepositoryScope
 import com.example.githubclient.mvp.model.api.IDataSource
 import com.example.githubclient.mvp.model.cache.IRepositoriesCache
 import com.example.githubclient.mvp.model.cache.RoomGithubUserRepositoriesCacheImpl
-import com.example.githubclient.mvp.model.entity.room.Database
-import com.example.githubclient.mvp.model.network.INetworkStatus
 import com.example.githubclient.mvp.model.cache.repo.IGithubUserRepositories
 import com.example.githubclient.mvp.model.cache.repo.retrofit.GithubUserRepositoriesImpl
+import com.example.githubclient.mvp.model.entity.room.Database
+import com.example.githubclient.mvp.model.network.INetworkStatus
 import dagger.Module
 import dagger.Provides
 

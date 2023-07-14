@@ -36,6 +36,7 @@ class FollowersPresenter(private val user: GithubUser?) : MvpPresenter<Followers
 
     @Inject
     lateinit var followersScopeContainer: IFollowerScopeContainer
+
     @Inject
     lateinit var imageLoader: IImageLoader<ImageView>
 

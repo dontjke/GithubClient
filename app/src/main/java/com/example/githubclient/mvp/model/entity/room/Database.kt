@@ -1,7 +1,5 @@
 package com.example.githubclient.mvp.model.entity.room
 
-import android.content.Context
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.githubclient.mvp.model.entity.room.dao.FollowerDao
 import com.example.githubclient.mvp.model.entity.room.dao.RepositoryDao
