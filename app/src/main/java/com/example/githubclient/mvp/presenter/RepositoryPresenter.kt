@@ -6,7 +6,7 @@ import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 import javax.inject.Inject
 
-class RepositoryPresenter(private val githubUserRepositories: GithubUserRepositories) :
+class RepositoryPresenter(private val githubUserRepositories: GithubUserRepositories?) :
     MvpPresenter<RepositoryView>() {
 
     @Inject
@@ -15,9 +15,9 @@ class RepositoryPresenter(private val githubUserRepositories: GithubUserReposito
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
-        viewState.setId(githubUserRepositories.id)
-        viewState.setTitle(githubUserRepositories.name)
-        viewState.setForksCount((githubUserRepositories.forksCount).toString())
+        githubUserRepositories?.let { viewState.setId(it.id) }
+        githubUserRepositories?.let { viewState.setTitle(it.name) }
+        viewState.setForksCount((githubUserRepositories?.forksCount).toString())
     }
 
     fun backPressed(): Boolean {

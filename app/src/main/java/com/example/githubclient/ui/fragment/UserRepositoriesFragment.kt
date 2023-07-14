@@ -1,5 +1,6 @@
 package com.example.githubclient.ui.fragment
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -32,7 +33,11 @@ class UserRepositoriesFragment : MvpAppCompatFragment(), UserRepositoryView, Bac
     }
 
     val presenter: UserRepositoriesPresenter by moxyPresenter {
-        val user: GithubUser? = arguments?.getParcelable(GITHUB_USER)
+        val user: GithubUser? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            arguments?.getParcelable(GITHUB_USER, GithubUser::class.java)
+        } else {
+            @Suppress("DEPRECATION") arguments?.getParcelable(GITHUB_USER)
+        }
         UserRepositoriesPresenter(user).apply {
             App.instance.initRepositorySubcomponent().inject(this)
         }
