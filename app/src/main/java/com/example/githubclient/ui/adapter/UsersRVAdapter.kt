@@ -31,15 +31,20 @@ class UsersRVAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            ItemUserBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        ).apply {
-            itemView.setOnClickListener { presenter.itemClickListener?.invoke(this) }
+        val binding = ItemUserBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+
+        val viewHolder = ViewHolder(binding)
+        binding.buttonRepositories.setOnClickListener {
+            presenter.onRepositoriesClicked(viewHolder)
         }
+        binding.buttonFollowers.setOnClickListener {
+            presenter.onFollowersClicked(viewHolder)
+        }
+        return viewHolder
     }
 
     override fun getItemCount() = presenter.getCount()

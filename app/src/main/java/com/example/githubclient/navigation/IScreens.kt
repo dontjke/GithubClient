@@ -7,5 +7,6 @@ import com.github.terrakok.cicerone.Screen
 interface IScreens {
     fun users(): Screen
     fun userRepositories(user: GithubUser): Screen
-    fun forks(forks: GithubUserRepositories): Screen
+    fun followers(user: GithubUser): Screen
+    fun repository(repository: GithubUserRepositories): Screen
 }

@@ -12,5 +12,4 @@ class ImageLoaderModule {
     @Singleton
     @Provides
     fun loadInto(): IImageLoader<ImageView> = GlideImageLoader()
-
 }

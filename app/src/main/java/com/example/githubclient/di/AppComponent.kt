@@ -1,19 +1,15 @@
 package com.example.githubclient.di
 
+import com.example.githubclient.di.follower.FollowerSubcomponent
 import com.example.githubclient.di.module.ApiModule
 import com.example.githubclient.di.module.AppModule
-import com.example.githubclient.di.module.CacheModule
 import com.example.githubclient.di.module.CiceroneModule
+import com.example.githubclient.di.module.DatabaseModule
 import com.example.githubclient.di.module.ImageLoaderModule
-import com.example.githubclient.di.module.RepositoryModule
-import com.example.githubclient.mvp.presenter.ForksPresenter
+import com.example.githubclient.di.user.UserSubcomponent
+import com.example.githubclient.mvp.presenter.FollowersPresenter
 import com.example.githubclient.mvp.presenter.MainPresenter
-import com.example.githubclient.mvp.presenter.UserRepositoriesPresenter
-import com.example.githubclient.mvp.presenter.UsersPresenter
 import com.example.githubclient.ui.activity.MainActivity
-import com.example.githubclient.ui.adapter.UsersRVAdapter
-import com.example.githubclient.ui.fragment.UserRepositoriesFragment
-import com.example.githubclient.ui.fragment.UsersFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -22,21 +18,13 @@ import javax.inject.Singleton
     modules = [
         ApiModule::class,
         AppModule::class,
-        CacheModule::class,
+        DatabaseModule::class,
         CiceroneModule::class,
-        RepositoryModule::class,
         ImageLoaderModule::class,
     ]
 )
 interface AppComponent {
+    fun userSubcomponent(): UserSubcomponent
     fun inject(mainActivity: MainActivity)
     fun inject(mainPresenter: MainPresenter)
-
-    fun inject(usersPresenter: UsersPresenter)
-
-    fun inject(usersRVAdapter: UsersRVAdapter)
-
-    fun inject(userRepositoriesPresenter: UserRepositoriesPresenter)
-
-    fun inject(forksPresenter: ForksPresenter)
 }
