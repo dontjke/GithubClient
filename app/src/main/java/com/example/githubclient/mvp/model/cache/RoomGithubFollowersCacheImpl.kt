@@ -2,7 +2,6 @@ package com.example.githubclient.mvp.model.cache
 
 import com.example.githubclient.mvp.model.entity.GithubFollower
 import com.example.githubclient.mvp.model.entity.GithubUser
-import com.example.githubclient.mvp.model.entity.GithubUserRepositories
 import com.example.githubclient.mvp.model.entity.room.Database
 import com.example.githubclient.mvp.model.entity.room.RoomGithubFollower
 import io.reactivex.rxjava3.core.Completable

@@ -18,7 +18,7 @@ class GithubFollowersRepositoryImpl(
     override fun getFollowers(user: GithubUser): Single<List<GithubFollower>> =
         networkStatus.isOnlineSingle().flatMap { isOnline ->
             if (isOnline) {
-                user?.followersUrl?.let { url ->
+                user.followersUrl?.let { url ->
                     api.getFollowers(url)
                         .flatMap { followers ->
                             cache.insertFollowersToDatabase(user, followers)

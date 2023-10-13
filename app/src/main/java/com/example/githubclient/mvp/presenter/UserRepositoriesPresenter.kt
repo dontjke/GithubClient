@@ -3,9 +3,9 @@ package com.example.githubclient.mvp.presenter
 import android.util.Log
 import android.widget.ImageView
 import com.example.githubclient.di.repository.module.IRepositoryScopeContainer
+import com.example.githubclient.mvp.model.cache.repo.IGithubUserRepositories
 import com.example.githubclient.mvp.model.entity.GithubUser
 import com.example.githubclient.mvp.model.entity.GithubUserRepositories
-import com.example.githubclient.mvp.model.cache.repo.IGithubUserRepositories
 import com.example.githubclient.mvp.presenter.list.IRepositoriesListPresenter
 import com.example.githubclient.mvp.view.IImageLoader
 import com.example.githubclient.mvp.view.UserRepositoryView
